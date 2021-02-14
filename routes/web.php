@@ -2,8 +2,6 @@
 
 use App\Http\Controllers\TweetController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\HomeController;
-
 
 
 /*
@@ -21,12 +19,11 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
 
-Route::get('/home', [HomeController::class, 'index'])->name('home');
+Route::middleware('auth')->group(function () {
+    Route::get('/tweets', [TweetController::class, 'index'])->name('home');
+    Route::post('/tweets', [TweetController::class, 'store']);
 
- Route::post('/tweets', [TweetController::class, 'store']);
+});
 
 require __DIR__.'/auth.php';

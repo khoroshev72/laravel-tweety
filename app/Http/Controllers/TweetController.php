@@ -7,6 +7,15 @@ use Illuminate\Http\Request;
 
 class TweetController extends Controller
 {
+    public function index()
+    {
+//        $tweets = auth()->user()->tweets()->latest()->get();
+        return view('tweet.index', [
+            'tweets' => auth()->user()->timeline()
+        ]);
+    }
+
+
     public function store()
     {
         $attrs = request()->validate([
