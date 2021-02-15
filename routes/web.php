@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\TweetController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\FollowController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -22,9 +23,15 @@ Route::get('/', function () {
 
 
 Route::middleware('auth')->group(function () {
-    Route::get('/tweets', [TweetController::class, 'index'])->name('home');
+    Route::get('/tweets', [TweetController::class, 'index'])
+        ->name('home');
     Route::post('/tweets', [TweetController::class, 'store']);
-    Route::get('/profile/{user}', [ProfileController::class, 'show'])->name('profile');
+    Route::get('/profile/{user:name}', [ProfileController::class, 'show'])
+        ->name('profile');
+    Route::post('/profile/{user:name}/follow', [FollowController::class, 'store'])
+        ->name('follow.store');
+    Route::delete('/profile/{user:name}/unfollow', [FollowController::class, 'delete'])
+        ->name('follow.delete');
 });
 
 require __DIR__.'/auth.php';
