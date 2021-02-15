@@ -11,11 +11,13 @@
         <hr class="my-4">
 
         <footer class="flex justify-between">
-            <img
-                    src="{{auth()->user()->avatar}}"
-                    alt="your avatar"
-                    class="rounded-full mr-2"
-            >
+            <a href="{{route('profile', auth()->user())}}">
+                <img
+                        src="{{auth()->user()->avatar}}"
+                        alt="your avatar"
+                        class="rounded-full mr-2"
+                >
+            </a>
 
             <button
                     type="submit"

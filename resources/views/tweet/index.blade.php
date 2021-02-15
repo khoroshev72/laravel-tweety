@@ -1,23 +1,8 @@
-@extends('layouts.app')
+<x-app>
 
-@section('content')
-  <div class="lg:flex lg:justify-center">
-    <div class="lg:w-32">
-      @include ('inc._sidebar-links')
-    </div>
+    @include ('inc._publish-tweet-panel')
 
-    <div class="lg:flex-1 lg:mx-10 lg:mb-10" style="max-width: 700px">
-      @include ('inc._publish-tweet-panel')
+    @include('inc._timeline')
 
-      <div class="border border-gray-300 rounded-lg">
-        @foreach($tweets as $tweet)
-          @include('inc.tweet')
-        @endforeach
-      </div>
-    </div>
+</x-app>
 
-    <div class="lg:w-1/6">
-      @include ('inc._friends-list')
-    </div>
-  </div>
-@endsection
