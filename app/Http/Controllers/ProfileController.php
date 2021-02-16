@@ -11,4 +11,11 @@ class ProfileController extends Controller
     {
         return view('profile.show', compact('user'));
     }
+
+    public function edit(User $user)
+    {
+//      $this->authorize('edit', $user);
+
+      return view('profile.edit', compact('user'));
+    }
 }

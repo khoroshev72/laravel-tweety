@@ -32,6 +32,9 @@ Route::middleware('auth')->group(function () {
         ->name('follow.store');
     Route::delete('/profile/{user:name}/unfollow', [FollowController::class, 'delete'])
         ->name('follow.delete');
+    Route::get('/profile/{user:name}/edit', [ProfileController::class, 'edit'])
+      ->name('profile.edit')
+      ->middleware('can:edit,user');
 });
 
 require __DIR__.'/auth.php';

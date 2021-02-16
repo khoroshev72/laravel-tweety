@@ -14,12 +14,18 @@
                 </div>
 
                 <div>
-                    <a
-                            href=""
-                            class="rounded-full border border-gray-300 py-2 px-4 text-black text-xs mr-2"
-                    >Edit Profile</a>
 
+                  @can('edit', $user)
+                    <a
+                      href="{{route('profile.edit', $user->name)}}"
+                      class="rounded-full border border-gray-300 py-2 px-4 text-black text-xs mr-2">
+                      Edit Profile
+                    </a>
+                  @endif
+
+                  @if(auth()->user()->isNot($user))
                     <x-toggle-follow :user="$user"></x-toggle-follow>
+                  @endcan
 
                 </div>
             </div>
