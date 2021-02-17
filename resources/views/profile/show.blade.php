@@ -2,9 +2,10 @@
 
     <header class="mb-6 relative">
             <img
-                    src="/images/default-profile-banner.jpg"
+                    src="{{ $user->avatar }}"
                     alt=""
                     class="mb-2"
+                    width="40"
             >
 
             <div class="flex justify-between items-center mb-4">
@@ -17,7 +18,7 @@
 
                   @can('edit', $user)
                     <a
-                      href="{{route('profile.edit', $user->name)}}"
+                      href="{{route('profile.edit', $user->slug)}}"
                       class="rounded-full border border-gray-300 py-2 px-4 text-black text-xs mr-2">
                       Edit Profile
                     </a>
