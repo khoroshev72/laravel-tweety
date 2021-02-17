@@ -1,5 +1,7 @@
 <div class="border border-gray-300 rounded-lg">
-    @foreach($tweets as $tweet)
-        @include('inc.tweet')
-    @endforeach
+    @forelse($tweets as $tweet)
+      @include('inc.tweet')
+    @empty
+      <p class="p-4">You have no tweets yet:(</p>
+    @endforelse
 </div>

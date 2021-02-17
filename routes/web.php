@@ -26,15 +26,17 @@ Route::middleware('auth')->group(function () {
     Route::get('/tweets', [TweetController::class, 'index'])
         ->name('home');
     Route::post('/tweets', [TweetController::class, 'store']);
-    Route::get('/profile/{user:name}', [ProfileController::class, 'show'])
+    Route::get('/profile/{user:slug}', [ProfileController::class, 'show'])
         ->name('profile');
-    Route::post('/profile/{user:name}/follow', [FollowController::class, 'store'])
+    Route::post('/profile/{user:slug}/follow', [FollowController::class, 'store'])
         ->name('follow.store');
-    Route::delete('/profile/{user:name}/unfollow', [FollowController::class, 'delete'])
+    Route::delete('/profile/{user:slug}/unfollow', [FollowController::class, 'delete'])
         ->name('follow.delete');
-    Route::get('/profile/{user:name}/edit', [ProfileController::class, 'edit'])
+    Route::get('/profile/{user:slug}/edit', [ProfileController::class, 'edit'])
       ->name('profile.edit')
       ->middleware('can:edit,user');
+    Route::patch('/profile/{user:slug}/update', [ProfileController::class, 'update'])
+      ->name('profile.update');
 });
 
 require __DIR__.'/auth.php';

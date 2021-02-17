@@ -1,5 +1,5 @@
 <div class="border border-blue-400 rounded-lg px-8 py-6 mb-8">
-    <form method="POST" action="/tweets">
+    <form method="POST" action="{{route('home')}}">
         @csrf
 
         <textarea
@@ -11,11 +11,12 @@
         <hr class="my-4">
 
         <footer class="flex justify-between">
-            <a href="{{route('profile', auth()->user())}}">
+            <a href="{{route('profile', auth()->user()->slug)}}">
                 <img
                         src="{{auth()->user()->avatar}}"
                         alt="your avatar"
                         class="rounded-full mr-2"
+                        width="40"
                 >
             </a>
 
