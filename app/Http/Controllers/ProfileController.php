@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rule;
 
 class ProfileController extends Controller
@@ -37,9 +38,14 @@ class ProfileController extends Controller
         ]
       ]);
 
+      if (request('avatar')) {
+        if (Storage::exists($user->getRawOriginal('avatar'))) {
+          Storage::delete($user->getRawOriginal('avatar'));
+        }
+        $attrs['avatar'] = request('avatar')->store('avatars');
+      }
+
       $user->slug = null;
-      $attrs['avatar'] = request('avatar')->store('avatars');
-      $attrs['password'] = bcrypt($attrs['password']);
       $user->update($attrs);
 
       return redirect()->route('profile', $user->slug);

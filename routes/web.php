@@ -3,6 +3,7 @@
 use App\Http\Controllers\TweetController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\FollowController;
+use \App\Http\Controllers\ExpolreController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -36,7 +37,10 @@ Route::middleware('auth')->group(function () {
       ->name('profile.edit')
       ->middleware('can:edit,user');
     Route::patch('/profile/{user:slug}/update', [ProfileController::class, 'update'])
-      ->name('profile.update');
+      ->name('profile.update')
+      ->middleware('can:edit,user');
+    Route::get('/explore', [ExpolreController::class, 'index'])
+      ->name('explore');
 });
 
 require __DIR__.'/auth.php';
